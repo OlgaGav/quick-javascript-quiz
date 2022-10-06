@@ -1,5 +1,63 @@
+let isWin;
+let timerCount;
+let winCounter;
+let loseCounter;
+let quizMain = document.querySelector(".quiz");
+let timerElement = document.querySelector(".timer-count");
+let startButton = document.getElementById("start-button");
 
-//correct answer is an index of answer's array
+function startQuiz() {
+    // timer value in minutes
+    timerCount = 5;
+    quizMain.innerHTML = "";
+    startTimer();
+    isWin = false;
+}
+
+// Implementation of timer. Initial value: 5 minutes
+function startTimer() {
+    timerElement.textContent = timerCount;
+    timer = setInterval (function() {
+        timerCount--;
+        timerElement.textContent = timerCount;
+        if (timerCount >=0) {
+            // check if win condition is met
+            if (isWin && timerCount>0) {
+                // clear the interval and stop timer
+                clearInterval(timer);
+                winGame();
+            }
+        }
+        // Check if lose condition is met
+        if (timerCount === 0) {
+            // clear interval
+            clearInterval(timer);
+            loseGame();
+        }
+    }, 60000
+    )
+}
+
+// rendering the page when 'win' conditions are met 
+function winGame() {
+
+}
+
+// rendering the page when 'lose' conditions are met
+function loseGame() {
+
+}
+
+//Attach event listener to start button to call startQuiz function on click
+startButton.addEventListener("click", startQuiz);
+
+
+
+
+
+
+
+// List of questions and answers fro the quiz. correct_answer is an index of answer's array
 let questions = [
 	{
 		"question_test": "Arrays in JavaScript can be used to store:",
