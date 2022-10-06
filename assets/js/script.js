@@ -1,17 +1,15 @@
-let isWin;
+let inProgress;
 let timerCount;
-let winCounter;
-let loseCounter;
+let highScore;
 let quizMain = document.querySelector(".quiz");
 let timerElement = document.querySelector(".timer-count");
 let startButton = document.getElementById("start-button");
 
 function startQuiz() {
-    // timer value in minutes
-    timerCount = 5;
+    timerCount = 120;
     quizMain.innerHTML = "";
     startTimer();
-    isWin = false;
+    inProgress = false;
 }
 
 // Implementation of timer. Initial value: 5 minutes
@@ -21,31 +19,41 @@ function startTimer() {
         timerCount--;
         timerElement.textContent = timerCount;
         if (timerCount >=0) {
-            // check if win condition is met
-            if (isWin && timerCount>0) {
+            // check if end quiz condition is met
+            if (!inProgress || timerCount===0) {
                 // clear the interval and stop timer
                 clearInterval(timer);
-                winGame();
+                endQuiz();
             }
         }
-        // Check if lose condition is met
-        if (timerCount === 0) {
-            // clear interval
-            clearInterval(timer);
-            loseGame();
-        }
-    }, 60000
-    )
+    }, 1000)
 }
+
 
 // rendering the page when 'win' conditions are met 
-function winGame() {
+function endQuiz() {
 
 }
 
-// rendering the page when 'lose' conditions are met
-function loseGame() {
 
+// put score to local storage, if current score if higher
+function setHighScoreToStorage(currentScore) {
+    // TODO add number wins on the page
+    let storedHighScore = getHighScoreFromStorage;
+    if (currentScore >= storedHighScore) {
+        localStorage.setItem("highScore", highScore);
+    }
+}
+// Function to get high score from local storage. Return 0 if doesn't exist.
+function getHighScoreFromStorage() {
+    // get stored value from client's localstorage if it's exist
+    let storedHighScore = localStorage.getItem("highScore");
+    // set counter to 0 if stored value doesn't exist
+    if (storedHighScore === null) {
+        return 0;
+    } else {
+        return storedHighScore;
+    }
 }
 
 //Attach event listener to start button to call startQuiz function on click
