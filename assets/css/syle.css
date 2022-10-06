@@ -1,0 +1,88 @@
+
+:root {
+    --dark: #351C75;
+    --medium: #BD60E7;
+    --light: #D9D3E9;
+}
+
+body{
+    
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1rem;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.5rem;
+}
+
+a {
+    color: var(--medium);
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.high-score {
+    margin: 2rem;
+}
+
+
+.timer {
+    margin: 2rem;
+}
+
+.start {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    align-content: center;
+    justify-content: center;
+}
+
+h1,
+p,
+button {
+    align-self: center;
+}
+
+h1 {
+    font-size: 4rem;
+    padding: 2rem;
+    margin: 2rem;
+}
+
+p {
+    font-size: 2rem;
+    line-height: 2rem;
+    padding: 1rem;
+}
+
+button {
+    background: var(--dark);
+    color: white;
+    border: none;
+    padding: 1rem 3rem;
+    margin: 1rem;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+}
+
+button:hover {
+    cursor: default;
+    background: var(--medium);
+    cursor: pointer;
+}
+
+.instructions {
+    align-self: center;
+    margin: 5rem;
+    width: 55%;
+    text-align: center;
+}
