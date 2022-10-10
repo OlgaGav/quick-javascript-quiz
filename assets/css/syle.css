@@ -1,4 +1,5 @@
 :root {
+    --default: black;
     --dark: #351C75;
     --medium: #BD60E7;
     --light: #D9D3E9;
@@ -18,15 +19,9 @@ header {
     font-size: 1.5rem;
 }
 
-main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-a {
+/* a {
     color: var(--medium);
-}
+} */
 
 h1,
 p,
@@ -108,7 +103,16 @@ form {
     cursor: pointer;
 }
 
+.high-score-page {
+    justify-self: center;
+}
 /* id selectors */
+#quiz {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #start-button {
     padding: 1rem 3rem;
     margin: 1rem;
@@ -150,6 +154,53 @@ form {
 
 #initials {
     padding-left: 1rem;
+}
+
+/* style for high score link in the header */
+#high-scores {
+    justify-content: center;
+}
+
+#high-score-link {
+    background-color: transparent;
+    color: var(--medium);
+    margin-left: 2rem;
+}
+
+/* style for high scores section */
+.high-scores {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    width: 70%;
+}
+.high-scores h2 {
+    align-self: left;
+    font-size: 4rem;
+    padding: 2rem 0;
+    margin: 2rem 0;
+}
+
+div #high-score-list {
+    background-color: var(--light);
+}
+
+#high-score-list {
+    list-style: decimal;
+    padding: 1rem 3rem;
+    font-size: 1.8rem;
+    color: var(--default);
+}
+
+#high-score-list li {
+    padding: 0.5rem;
+    border-bottom: var(--medium) 0.1rem dotted;
+}
+
+.high-score-button {
+    font-size: 1.8rem;
+    padding: .5rem 3rem;
+    margin: 2rem 2rem 2rem 0;
 }
 
 /*
