@@ -1,29 +1,19 @@
-let inProgress;
 let timerCount;
-let highScore;
-let quizMain = document.querySelector(".quiz");
+let quizMain = document.getElementById("quiz");
 let timerElement = document.querySelector(".timer-count");
 let startButton = document.getElementById("start-button");
+let viewHighScoresLink = document.getElementById("high-score-link");
+let highScores = document.getElementById("high-scores");
+let backButton = document.getElementById("back-button");
+let clearHighscoresButton = document.getElementById("clear-high-scores-button");
+var storedScores;
 
 function startQuiz() {
   timerCount = 60;
   quizMain.innerHTML = "";
   startTimer();
-  questions();
-  inProgress = true;
-}
-
-function startQuiz2() {
-  timerCount = 60;
-  quizMain.innerHTML = "";
-  startTimer();
-  inProgress = true;
   quizField();
   var numberOfQuestionsInQuiz = quizQuestions.length;
-  console.log(
-    "startQuiz2 begin, numberOfQuestionsInQuiz is ",
-    numberOfQuestionsInQuiz
-  );
   //start quiz from first question
   showQuestion(0);
 }
@@ -34,27 +24,22 @@ function startTimer() {
   timer = setInterval(function () {
     timerCount--;
     timerElement.textContent = timerCount;
-    if (timerCount >= 0) {
-      // check if end quiz condition is met
-      if (!inProgress || timerCount === 0) {
-        // clear the interval and stop timer
-        clearInterval(timer);
-        endQuiz();
-      }
+    if (timerCount <= 0) {
+      endQuiz();
     }
   }, 1000);
 }
 
 function stopTimer() {
   clearInterval(timer);
-  console.log("timerCount: ", timerCount);
 }
 
 function quizField() {
   //Generate section element which will be the parent for quiz field
   var qSection = document.createElement("section");
   qSection.id = "quiz-field";
-  document.getElementsByTagName("main")[0].appendChild(qSection);
+  // document.getElementsByTagName("main")[0].appendChild(qSection);
+  quizMain.appendChild(qSection);
 }
 
 function showQuestion(questionId) {
@@ -95,7 +80,6 @@ function showQuestion(questionId) {
     let aLi = document.createElement("li");
     aLi.className = "answer";
     aLi.onclick = () => checkAnswer(questionId, j);
-    // document.getElementById("answers").appendChild(aLi);
     answers.appendChild(aLi);
     aLi.textContent = j + 1 + ". " + answerOption;
   }
@@ -116,15 +100,14 @@ function checkAnswer(questionId, userAnswerId) {
   // render the validation message
   if (correctAnswer === userAnswerId) {
     document.getElementById("validation").textContent = "Correct!";
-    console.log("answer was correct");
   } else {
     // if answer is not correct  - timer minus 10 seconds
     timerCount -= 10;
     document.getElementById("validation").textContent = "Wrong!";
-    console.log("answer was wrong");
   }
   // quiz ends when timer is 0
   if (timerCount <= 0) {
+    timerCount = 0;
     endQuiz();
     return;
   }
@@ -142,22 +125,9 @@ function checkAnswer(questionId, userAnswerId) {
 // rendering the page when 'win' conditions are met
 function endQuiz() {
   stopTimer();
-  console.log("quiz end");
   let currentScore = timerCount;
-  console.log("current score: ", currentScore);
+  timerElement.textContent = currentScore;
   //render end quiz page
-  /*
-          <section id="results">
-            <h2>All done!</h2>
-            <p id="results-p">Your final score is <span id="current-score">22</span>.</p>
-            <form>
-                  <label for="initials">Enter initials:</label>
-                  <input id="initials" type="text"/>
-                  <button id="submit-button">Submit</button>
-              </form>
-        </section>
-  */
-  //  document.getElementById("questionText").innerHTML = "";
   document.getElementById("answers").remove();
   document.getElementById("questionText").innerHTML =
     "<h2>All done!</h2>" +
@@ -169,30 +139,64 @@ function endQuiz() {
     "<input id='initials' type='text'/>" +
     "<button id='submit-button'>Submit</button>" +
     "</form>";
+
+    document.getElementById("submit-button").addEventListener("click", function(event) {
+      event.preventDefault();
+      var userName = document.querySelector("#initials").value.trim();
+      if (userName.length > 0) {
+        var newScoreObject = {
+          "name": userName,
+          "score": currentScore
+        } 
+      } else {
+        return;
+      }
+      var storedScores = JSON.parse(localStorage.getItem("highScores"));
+      if (storedScores === null) {
+        var storedScores = [];
+      }
+      storedScores.push(newScoreObject);
+      localStorage.setItem("highScores", JSON.stringify(storedScores));
+      showHighScorePage(); 
+    })
 }
 
-// put score to local storage, if current score if higher
-function setHighScoreToStorage(currentScore) {
-  // TODO add number wins on the page
-  let storedHighScore = getHighScoreFromStorage;
-  if (currentScore >= storedHighScore) {
-    localStorage.setItem("highScore", highScore);
+function renderHighScores() {
+  document.getElementById("high-score-list").innerHTML="";
+
+  var highScoresArray = JSON.parse(localStorage.getItem("highScores"));
+  if (highScoresArray === null) {
+    highScoresArray = [];
+  }
+  highScoresArray.sort((a, b) => a.score > b.score ? -1 : 0);
+  for (let i = 0; i < highScoresArray.length; i++) {
+    let liEl = document.createElement('li');
+    liEl.textContent = highScoresArray[i].name + " - " + highScoresArray[i].score;
+    document.getElementById("high-score-list").appendChild(liEl);
   }
 }
-// Function to get high score from local storage. Return 0 if doesn't exist.
-function getHighScoreFromStorage() {
-  // get stored value from client's localstorage if it's exist
-  let storedHighScore = localStorage.getItem("highScore");
-  // set counter to 0 if stored value doesn't exist
-  if (storedHighScore === null) {
-    return 0;
-  } else {
-    return storedHighScore;
-  }
+
+function showHighScorePage() {
+  quizMain.style.display = "none";
+  highScores.style.display = "flex";
+  renderHighScores();
+}
+
+function clearHighScores() {
+  localStorage.removeItem("highScores");
+  document.getElementById("high-score-list").innerHTML="";
+}
+
+function backToQuiz() {
+  quizMain.style.display = "flex";
+  highScores.style.display = "none";
 }
 
 //Attach event listener to start button to call startQuiz function on click
-startButton.addEventListener("click", startQuiz2);
+startButton.addEventListener("click", startQuiz);
+viewHighScoresLink.addEventListener("click", showHighScorePage);
+backButton.addEventListener("click", backToQuiz);
+clearHighscoresButton.addEventListener("click", clearHighScores);
 
 // List of questions and answers for the quiz. correct_answer is an index of answer's array
 let quizQuestions = [
