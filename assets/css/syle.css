@@ -1,10 +1,10 @@
-
 :root {
     --dark: #351C75;
     --medium: #BD60E7;
     --light: #D9D3E9;
 }
 
+/* element selectors */
 body{
     
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -18,31 +18,14 @@ header {
     font-size: 1.5rem;
 }
 
-a {
-    color: var(--medium);
-}
-
 main {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.high-score {
-    margin: 2rem;
-}
-
-
-.timer {
-    margin: 2rem;
-}
-
-.start {
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 auto;
-    align-content: center;
-    justify-content: center;
+a {
+    color: var(--medium);
 }
 
 h1,
@@ -71,16 +54,31 @@ button {
     text-align: center;
 }
 
-#start-button {
-    padding: 1rem 3rem;
-    margin: 1rem;
-    font-size: 1.5rem;
-}
-
 button:hover {
     cursor: default;
     background: var(--medium);
     cursor: pointer;
+}
+
+form {
+    font-size: 1.5rem;
+}
+
+/* class selectors */
+.high-score {
+    margin: 2rem;
+}
+
+.timer {
+    margin: 2rem;
+}
+
+.start {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    align-content: center;
+    justify-content: center;
 }
 
 .instructions {
@@ -88,24 +86,6 @@ button:hover {
     margin: 5rem;
     width: 55%;
     text-align: center;
-}
-
-.quiz-field,
-#quiz-field {
-    padding: 2rem;
-    margin: 5rem 2rem;
-    border: 5px;
-    width: 60%;
-}
-
-#questionText {
-    font-size: 2.5rem;
-}
-
-#answers{
-    display: flex;
-    flex-direction: column;
-    margin: 2rem 0;
 }
 
 .answer{
@@ -128,6 +108,30 @@ button:hover {
     cursor: pointer;
 }
 
+/* id selectors */
+#start-button {
+    padding: 1rem 3rem;
+    margin: 1rem;
+    font-size: 1.5rem;
+}
+
+#quiz-field {
+    padding: 2rem;
+    margin: 5rem 2rem;
+    border: 5px;
+    width: 60%;
+}
+
+#questionText {
+    font-size: 2.5rem;
+}
+
+#answers{
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 0;
+}
+
 #validation{
     display: block;
     border-style: solid hidden hidden hidden;
@@ -144,6 +148,13 @@ button:hover {
     font-size: 1.3rem;
 }
 
+#initials {
+    padding-left: 1rem;
+}
+
+/*
+not used
+
 #results {
     margin-top: 4rem;;
     font-size: 1.5rem;
@@ -154,3 +165,5 @@ button:hover {
     margin: 1rem 0;
     font-size: 1.5rem;
 }
+
+*/

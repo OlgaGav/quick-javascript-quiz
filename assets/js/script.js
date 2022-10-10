@@ -45,7 +45,10 @@ function startTimer() {
   }, 1000);
 }
 
-function stopTimer() {}
+function stopTimer() {
+  clearInterval(timer);
+  console.log("timerCount: ", timerCount);
+}
 
 function quizField() {
   //Generate section element which will be the parent for quiz field
@@ -140,6 +143,32 @@ function checkAnswer(questionId, userAnswerId) {
 function endQuiz() {
   stopTimer();
   console.log("quiz end");
+  let currentScore = timerCount;
+  console.log("current score: ", currentScore);
+  //render end quiz page
+  /*
+          <section id="results">
+            <h2>All done!</h2>
+            <p id="results-p">Your final score is <span id="current-score">22</span>.</p>
+            <form>
+                  <label for="initials">Enter initials:</label>
+                  <input id="initials" type="text"/>
+                  <button id="submit-button">Submit</button>
+              </form>
+        </section>
+  */
+  //  document.getElementById("questionText").innerHTML = "";
+  document.getElementById("answers").remove();
+  document.getElementById("questionText").innerHTML =
+    "<h2>All done!</h2>" +
+    "<p id='results-p'> Your final score is <span id='current-score'>" +
+    currentScore +
+    "</span>.</p>" +
+    "<form>" +
+    "<label for='initials'>Enter initials:   </label>" +
+    "<input id='initials' type='text'/>" +
+    "<button id='submit-button'>Submit</button>" +
+    "</form>";
 }
 
 // put score to local storage, if current score if higher
