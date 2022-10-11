@@ -33,7 +33,7 @@ h1 {
 
 p {
     font-size: 2rem;
-    line-height: 2rem;
+    line-height: 2.5rem;
     padding: 1rem;
 }
 
@@ -67,7 +67,7 @@ form {
 .instructions {
     align-self: center;
     margin: 5rem;
-    width: 55%;
+    width: 65%;
     text-align: center;
 }
 
@@ -99,7 +99,7 @@ form {
 .high-score-button {
     font-size: 1.8rem;
     padding: .5rem 3rem;
-    margin: 2rem 2rem 2rem 0;
+    margin: 2rem 2rem 0 0;
 }
 
 .high-scores {
@@ -108,6 +108,7 @@ form {
     align-content: flex-start;
     width: 70%;
 }
+
 .high-scores h2 {
     align-self: left;
     font-size: 4rem;
@@ -153,7 +154,7 @@ form {
     padding: 2rem;
     margin: 5rem 2rem;
     border: 5px;
-    width: 60%;
+    width: 70%;
 }
 
 #questionText {
@@ -214,15 +215,97 @@ div #high-score-list {
     font-size: 1.5rem;
 }
 
-@media screen and (max-width: 1148px) {
+/* 769px — 1024px: Small screens, laptops */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+
     h1 {
-        padding: 0;
-    }
-    .high-score-button {
-        margin: 2rem 0 0 0;
+        padding: 1rem;
+        margin: 1rem;
+        font-size: 3rem;
     }
 
-    #submit-button {
-        margin: 1rem 2rem 1rem 0;
+    .instructions{
+        margin: 1rem;
     }
+
+    #start {
+        display: flex;
+        flex-direction: column;
+        flex: 0 0 auto;
+        align-content: center;
+        justify-content: center;
+    }
+    
+    #start-button {
+        padding: 1rem 3rem;
+        margin: 0;
+        font-size: 1.5rem;
+    }
+    
+}
+
+/* 481px — 768px: iPads, Tablets */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+
+    h1 {
+        padding: 1rem 0;
+        margin: 1rem 0;
+        font-size: 2.6rem;
+    }
+
+    p {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        padding: 0.5rem;
+    }
+
+    .instructions {
+        align-self: center;
+        margin: 1rem;
+        width: 90%;
+        text-align: center;
+    }
+
+    #quiz-field {
+        padding: 2rem;
+        margin: 5rem 2rem;
+        border: 5px;
+        width: 100%;
+    }
+}
+
+/* 320px — 480px: Mobile devices */
+@media only screen and (max-width: 480px) {
+    
+    h1 {
+        padding: 1rem 0;
+        margin: 1rem 0;
+        font-size: 2rem;
+    }
+
+    p {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        padding: 0.5rem;
+    }
+
+    .high-scores h2 {
+        font-size: 3rem;
+    }
+    .answer{
+        padding: 1rem;
+        margin: 1rem 0;
+        font-size: 1.2rem;
+        width: 15rem;
+    }
+
+    .high-score-button {
+        font-size: 1.5rem;
+        padding: .5rem 2rem;
+    }
+
+    #questionText {
+        font-size: 1.5rem;
+    }
+
 }
