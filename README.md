@@ -33,4 +33,4 @@ Learning materials [Berkley Extension: coding bootcamp](https://extension.berkel
 
 
 ## License
-n/a 
+MIT

@@ -9,7 +9,7 @@ let highScores = document.getElementById("high-scores");
 let backButton = document.getElementById("back-button");
 let clearHighscoresButton = document.getElementById("clear-high-scores-button");
 
-// List of questions and answers for the quiz. correct_answer is an index of answer's array
+// List of questions and answers for the quiz. correct_answer is an index of answers' array
 let quizQuestions = [
   {
     question: "1. Arrays in JavaScript can be used to store:",
@@ -54,11 +54,12 @@ let quizQuestions = [
     correct_answer: 0,
   },
   {
-    question: "7. A very useful tool used during development and debugging for printing content to the debugger is:",
+    question:
+      "7. A very useful tool used during development and debugging for printing content to the debugger is:",
     answers: ["JavaScript", "terminal/bash", "for loop", "console.log"],
     correct_answer: 3,
-  }
-]
+  },
+];
 
 // function which is called to start the quiz
 function startQuiz() {
@@ -85,11 +86,11 @@ function startTimer() {
 }
 
 function stopTimer() {
-  inProgress=false;
+  inProgress = false;
   clearInterval(timer);
 }
 
-
+// add quiz-field section. it is used as parent for quiz question and answers
 function quizField() {
   //Generate section element which will be the parent for quiz field
   var qSection = document.createElement("section");
@@ -139,10 +140,11 @@ function showQuestion(questionId) {
   }
 }
 
+// function to validate the answer and display corresponding message
 function checkAnswer(questionId, userAnswerId) {
   let activeQuestionInQuiz = quizQuestions[questionId];
   let correctAnswer = activeQuestionInQuiz.correct_answer;
-
+  // clean the previous message or create new element if it doesn't exist
   if (document.getElementById("validation")) {
     document.getElementById("validation").innerHTML = "";
   } else {
@@ -167,7 +169,7 @@ function checkAnswer(questionId, userAnswerId) {
   }
 
   let nextQuestionId = questionId + 1;
-  //if this is the last question user redirected to page to show user's score.
+  //if this is the last question user redirectes to end quiz page
   if (nextQuestionId === quizQuestions.length) {
     endQuiz();
     return;
@@ -194,14 +196,17 @@ function endQuiz() {
     "<button id='submit-button'>Submit</button>" +
     "</form>";
 
-    document.getElementById("submit-button").addEventListener("click", function(event) {
+  // save initials and score to localstorage when user click submit button at the end quiz page
+  document
+    .getElementById("submit-button")
+    .addEventListener("click", function (event) {
       event.preventDefault();
       var userName = document.querySelector("#initials").value.trim();
       if (userName.length > 0) {
         var newScoreObject = {
-          "name": userName,
-          "score": currentScore
-        } 
+          name: userName,
+          score: currentScore,
+        };
       } else {
         return;
       }
@@ -211,13 +216,13 @@ function endQuiz() {
       }
       storedScores.push(newScoreObject);
       localStorage.setItem("highScores", JSON.stringify(storedScores));
-      showHighScorePage(); 
-    })
+      showHighScorePage();
+    });
 }
 
 // function to show the table with scores if any are stored in localstorage
 function renderHighScores() {
-  document.getElementById("high-score-list").innerHTML="";
+  document.getElementById("high-score-list").innerHTML = "";
 
   var highScoresArray = JSON.parse(localStorage.getItem("highScores"));
   if (highScoresArray === null) {
@@ -226,12 +231,14 @@ function renderHighScores() {
   // sort aray with scores in descending order
   highScoresArray.sort((a, b) => b.score - a.score);
   for (let i = 0; i < highScoresArray.length; i++) {
-    let liEl = document.createElement('li');
-    liEl.textContent = highScoresArray[i].name + " - " + highScoresArray[i].score;
+    let liEl = document.createElement("li");
+    liEl.textContent =
+      highScoresArray[i].name + " - " + highScoresArray[i].score;
     document.getElementById("high-score-list").appendChild(liEl);
   }
 }
 
+// function which is called when user click on 'view high scores' link at the top of the page
 function showHighScorePage() {
   quizMain.style.display = "none";
   startPage.style.display = "none";
@@ -239,21 +246,23 @@ function showHighScorePage() {
   renderHighScores();
 }
 
+// function is called when user click 'clear high scores' button at the high scores page
 function clearHighScores() {
   localStorage.removeItem("highScores");
-  document.getElementById("high-score-list").innerHTML="";
+  document.getElementById("high-score-list").innerHTML = "";
 }
 
+// function is called when user click 'back' button at the high scores page
 function backToQuiz() {
   quizMain.style.display = "flex";
   highScores.style.display = "none";
-  if (!inProgress){
+  if (!inProgress) {
     startPage.style.display = "flex";
     quizMain.innerHTML = "";
   }
 }
 
-//Attach event listener to start button to call startQuiz function on click
+//Attach event listeners on the click on the corresponding elements on the page
 startButton.addEventListener("click", startQuiz);
 viewHighScoresLink.addEventListener("click", showHighScorePage);
 backButton.addEventListener("click", backToQuiz);
