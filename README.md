@@ -1,6 +1,6 @@
 # Quiz Game: JavaScript
 ## Description
-This application can help to check the basic knowledge of JavaScript. This is a practice test, it means that you will see the result as soon as answer the question and repeat quiz again.
+This application can help to check the basic knowledge of JavaScript. This is a practice test, it means that you will see the result as soon as answer the question. It's allowed to take the quiz any number of times.
 ## Usage
 This site was built using [GitHub Pages](https://pages.github.com/). 
 
@@ -20,7 +20,7 @@ It's allowed to pass this quiz any number of times. You may save your score if a
 
 ![This image of the end page, when all the questions answered. It shows the current score, input field to add intials and submit button](assets/images/AllDone.png)
 
-At the end of the quiz you can check the best highest score. You can see this page by **View high scores** link at the top of the page as well.
+At the end of the quiz you can check the highest score. You can see this page by **View high scores** link at the top of the page as well.
 
 ![This image of the high scores page, table shows stored initials and corresponding score in descending order. ](assets/images/HighScores.png)
 
