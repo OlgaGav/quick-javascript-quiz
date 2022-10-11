@@ -19,10 +19,6 @@ header {
     font-size: 1.5rem;
 }
 
-/* a {
-    color: var(--medium);
-} */
-
 h1,
 p,
 button {
@@ -68,14 +64,6 @@ form {
     margin: 2rem;
 }
 
-.start {
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 auto;
-    align-content: center;
-    justify-content: center;
-}
-
 .instructions {
     align-self: center;
     margin: 5rem;
@@ -103,20 +91,62 @@ form {
     cursor: pointer;
 }
 
+/* style for high scores section */
 .high-score-page {
     justify-self: center;
 }
-/* id selectors */
-#quiz {
+
+.high-score-button {
+    font-size: 1.8rem;
+    padding: .5rem 3rem;
+    margin: 2rem 2rem 2rem 0;
+}
+
+.high-scores {
     display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    width: 70%;
+}
+.high-scores h2 {
+    align-self: left;
+    font-size: 4rem;
+    padding: 2rem 0;
+    margin: 2rem 0;
+}
+
+/* id selectors */
+
+/* style for high score link in the header */
+#high-scores {
     justify-content: center;
-    align-items: center;
+}
+
+#high-score-link {
+    background-color: transparent;
+    color: var(--medium);
+    margin-left: 2rem;
+}
+
+/* style for start page */
+#start {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    align-content: center;
+    justify-content: center;
 }
 
 #start-button {
     padding: 1rem 3rem;
     margin: 1rem;
     font-size: 1.5rem;
+}
+
+#quiz {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #quiz-field {
@@ -154,31 +184,7 @@ form {
 
 #initials {
     padding-left: 1rem;
-}
-
-/* style for high score link in the header */
-#high-scores {
-    justify-content: center;
-}
-
-#high-score-link {
-    background-color: transparent;
-    color: var(--medium);
-    margin-left: 2rem;
-}
-
-/* style for high scores section */
-.high-scores {
-    display: flex;
-    flex-direction: column;
-    align-content: flex-start;
-    width: 70%;
-}
-.high-scores h2 {
-    align-self: left;
-    font-size: 4rem;
-    padding: 2rem 0;
-    margin: 2rem 0;
+    margin-top: 1rem;
 }
 
 div #high-score-list {
@@ -197,15 +203,6 @@ div #high-score-list {
     border-bottom: var(--medium) 0.1rem dotted;
 }
 
-.high-score-button {
-    font-size: 1.8rem;
-    padding: .5rem 3rem;
-    margin: 2rem 2rem 2rem 0;
-}
-
-/*
-not used
-
 #results {
     margin-top: 4rem;;
     font-size: 1.5rem;
@@ -217,4 +214,15 @@ not used
     font-size: 1.5rem;
 }
 
-*/
+@media screen and (max-width: 1148px) {
+    h1 {
+        padding: 0;
+    }
+    .high-score-button {
+        margin: 2rem 0 0 0;
+    }
+
+    #submit-button {
+        margin: 1rem 2rem 1rem 0;
+    }
+}

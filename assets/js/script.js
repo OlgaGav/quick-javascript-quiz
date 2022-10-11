@@ -1,24 +1,78 @@
 let timerCount;
+let inProgress = false;
 let quizMain = document.getElementById("quiz");
 let timerElement = document.querySelector(".timer-count");
+let startPage = document.getElementById("start");
 let startButton = document.getElementById("start-button");
 let viewHighScoresLink = document.getElementById("high-score-link");
 let highScores = document.getElementById("high-scores");
 let backButton = document.getElementById("back-button");
 let clearHighscoresButton = document.getElementById("clear-high-scores-button");
-var storedScores;
 
+// List of questions and answers for the quiz. correct_answer is an index of answer's array
+let quizQuestions = [
+  {
+    question: "1. Arrays in JavaScript can be used to store:",
+    answers: [
+      "Numbers and Strings",
+      "Other Arrays",
+      "Booleans",
+      "All of the Above",
+    ],
+    correct_answer: 3,
+  },
+  {
+    question:
+      "2. String values must be enclosed within ____ when being assigned to variables",
+    answers: ["Commas", "Curly Brackets", "Quotes", "Parenthesis"],
+    correct_answer: 2,
+  },
+  {
+    question: "3. Commonly used data types DO NOT include:",
+    answers: ["Strings", "Booleans", "Alerts", "Numbers"],
+    correct_answer: 2,
+  },
+  {
+    question: "4. The condition of an if/else statement is enclosed with:",
+    answers: ["Quotes", "Curly Brackets", "Parenthesis", "Square Brackets"],
+    correct_answer: 2,
+  },
+  {
+    question:
+      "5. As a developer, I want to be able to remove the last element of my array and I want to also be able to add a new element to the beginning of my array. Which two array methods should I use?",
+    answers: [
+      "pop() and unshift()",
+      "push() and sort()",
+      "forEach() and pop()",
+      "concat() and shift()",
+    ],
+    correct_answer: 0,
+  },
+  {
+    question: "6. How do we declare a conditional statement in JavaScript?",
+    answers: ["if...else", "for loop", "while loop", "difference...between"],
+    correct_answer: 0,
+  },
+  {
+    question: "7. A very useful tool used during development and debugging for printing content to the debugger is:",
+    answers: ["JavaScript", "terminal/bash", "for loop", "console.log"],
+    correct_answer: 3,
+  }
+]
+
+// function which is called to start the quiz
 function startQuiz() {
   timerCount = 60;
+  startPage.style.display = "none";
   quizMain.innerHTML = "";
+  inProgress = true;
   startTimer();
   quizField();
-  var numberOfQuestionsInQuiz = quizQuestions.length;
   //start quiz from first question
   showQuestion(0);
 }
 
-// Implementation of timer.
+// Implementation of timer
 function startTimer() {
   timerElement.textContent = timerCount;
   timer = setInterval(function () {
@@ -31,14 +85,15 @@ function startTimer() {
 }
 
 function stopTimer() {
+  inProgress=false;
   clearInterval(timer);
 }
+
 
 function quizField() {
   //Generate section element which will be the parent for quiz field
   var qSection = document.createElement("section");
   qSection.id = "quiz-field";
-  // document.getElementsByTagName("main")[0].appendChild(qSection);
   quizMain.appendChild(qSection);
 }
 
@@ -50,7 +105,6 @@ function showQuestion(questionId) {
   <div id="validation"> for validation message
   at the beginning clean the quiz field from previous question
   */
-  //   document.getElementById("quiz-field").innerHTML = "";
 
   if (document.getElementById("questionText")) {
     document.getElementById("questionText").innerHTML = "";
@@ -118,11 +172,11 @@ function checkAnswer(questionId, userAnswerId) {
     endQuiz();
     return;
   }
-  //show next question  if it's not he last one
+  //show next question  if it's not the last one
   showQuestion(nextQuestionId);
 }
 
-// rendering the page when 'win' conditions are met
+// rendering the page when 'end quiz' conditions are met
 function endQuiz() {
   stopTimer();
   let currentScore = timerCount;
@@ -161,6 +215,7 @@ function endQuiz() {
     })
 }
 
+// function to show the table with scores if any are stored in localstorage
 function renderHighScores() {
   document.getElementById("high-score-list").innerHTML="";
 
@@ -168,7 +223,8 @@ function renderHighScores() {
   if (highScoresArray === null) {
     highScoresArray = [];
   }
-  highScoresArray.sort((a, b) => a.score > b.score ? -1 : 0);
+  // sort aray with scores in descending order
+  highScoresArray.sort((a, b) => b.score - a.score);
   for (let i = 0; i < highScoresArray.length; i++) {
     let liEl = document.createElement('li');
     liEl.textContent = highScoresArray[i].name + " - " + highScoresArray[i].score;
@@ -178,6 +234,7 @@ function renderHighScores() {
 
 function showHighScorePage() {
   quizMain.style.display = "none";
+  startPage.style.display = "none";
   highScores.style.display = "flex";
   renderHighScores();
 }
@@ -190,6 +247,10 @@ function clearHighScores() {
 function backToQuiz() {
   quizMain.style.display = "flex";
   highScores.style.display = "none";
+  if (!inProgress){
+    startPage.style.display = "flex";
+    quizMain.innerHTML = "";
+  }
 }
 
 //Attach event listener to start button to call startQuiz function on click
@@ -197,49 +258,3 @@ startButton.addEventListener("click", startQuiz);
 viewHighScoresLink.addEventListener("click", showHighScorePage);
 backButton.addEventListener("click", backToQuiz);
 clearHighscoresButton.addEventListener("click", clearHighScores);
-
-// List of questions and answers for the quiz. correct_answer is an index of answer's array
-let quizQuestions = [
-  {
-    question: "1. Arrays in JavaScript can be used to store:",
-    answers: [
-      "Numbers and Strings",
-      "Other Arrays",
-      "Booleans",
-      "All of the Above",
-    ],
-    correct_answer: 3,
-  },
-  {
-    question:
-      "2. String values must be enclosed within ____ when being assigned to variables",
-    answers: ["Commas", "Curly Brackets", "Quotes", "Parenthesis"],
-    correct_answer: 2,
-  },
-  {
-    question: "3. Commonly used data types DO NOT include:",
-    answers: ["Strings", "Booleans", "Alerts", "Numbers"],
-    correct_answer: 2,
-  },
-  {
-    question: "4. The condition of an if/else statement is enclosed with:",
-    answers: ["Quotes", "Curly Brackets", "Parenthesis", "Square Brackets"],
-    correct_answer: 2,
-  },
-  {
-    question:
-      "5. As a developer, I want to be able to remove the last element of my array and I want to also be able to add a new element to the beginning of my array. Which two array methods should I use?",
-    answers: [
-      "pop() and unshift()",
-      "push() and sort()",
-      "forEach() and pop()",
-      "concat() and shift()",
-    ],
-    correct_answer: 0,
-  },
-  {
-    question: "6. How do we declare a conditional statement in JavaScript?",
-    answers: ["if...else", "for loop", "while loop", "difference...between"],
-    correct_answer: 0,
-  },
-];
