@@ -62,7 +62,7 @@ let quizQuestions = [
 
 // function which is called to start the quiz
 function startQuiz() {
-  timerCount = 60;
+  timerCount = 70;
   startPage.style.display = "none";
   quizMain.innerHTML = "";
   inProgress = true;
