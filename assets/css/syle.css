@@ -100,12 +100,14 @@ form {
     font-size: 1.8rem;
     padding: .5rem 3rem;
     margin: 2rem 2rem 0 0;
+    text-align: left;
 }
 
 .high-scores {
     display: flex;
     flex-direction: column;
     align-content: flex-start;
+    justify-content: left;
     width: 70%;
 }
 
@@ -194,7 +196,7 @@ div #high-score-list {
 
 #high-score-list {
     list-style: decimal;
-    padding: 1rem 3rem;
+    padding: 1rem 4rem;
     font-size: 1.8rem;
     color: var(--default);
 }
@@ -267,10 +269,9 @@ div #high-score-list {
     }
 
     #quiz-field {
-        padding: 2rem;
-        margin: 5rem 2rem;
-        border: 5px;
-        width: 100%;
+        padding: 1rem;
+        margin: 1rem;
+        border: 0;
     }
 }
 
@@ -289,7 +290,12 @@ div #high-score-list {
         padding: 0.5rem;
     }
 
+    button .high-score-button {
+        text-align: left;
+    }
+
     .high-scores h2 {
+        margin: 0;
         font-size: 3rem;
     }
     .answer{
@@ -304,8 +310,17 @@ div #high-score-list {
         padding: .5rem 2rem;
     }
 
+    #quiz-field {
+        padding: 0;
+        margin: 1rem;
+        border: 0;
+    }
+
     #questionText {
         font-size: 1.5rem;
     }
 
+    #high-score-list {
+        padding: 1rem 1rem 1rem 4rem;
+    }
 }
