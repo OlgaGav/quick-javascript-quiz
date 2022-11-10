@@ -4,7 +4,7 @@ This application can help to check the basic knowledge of JavaScript. This is a 
 ## Usage
 This site was built using [GitHub Pages](https://pages.github.com/). 
 
-Available by link https://olgagav.github.io/quiz/
+Available by link https://olgagav.github.io/quick-javascript-quiz/
 
 Open the application by link and click on **Start** button to start the quiz.
 
