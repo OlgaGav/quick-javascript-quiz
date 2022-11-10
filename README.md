@@ -1,6 +1,6 @@
 # Quiz Game: JavaScript
 
-https://img.shields.io/github/license/olgagav/quick-javascript-quiz?style=social
+![License badge](https://img.shields.io/github/license/olgagav/quick-javascript-quiz?style=plastic)
 
 ## Description
 This application can help to check the basic knowledge of JavaScript. This is a practice test, it means that you will see the result as soon as answer the question. It's allowed to take the quiz any number of times.
@@ -36,4 +36,4 @@ Learning materials [Berkley Extension: coding bootcamp](https://extension.berkel
 
 
 ## License
-MIT
+Licensed under the MIT license.
