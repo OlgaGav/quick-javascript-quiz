@@ -30,7 +30,7 @@ At the end of the quiz you can check the highest score. You can see this page by
 Click **Go back** button to start quiz again.
 
 ## Credits
-Developed by Olga Gavrushenko.
+Developed by Olga Gavrushenko ([ogavby+bb@gmail.com](mailto:ogavby+bb@gmail.com?subject=[GitHub]%20js%20quizz)).
 
 Learning materials [Berkley Extension: coding bootcamp](https://extension.berkeley.edu/)
 
